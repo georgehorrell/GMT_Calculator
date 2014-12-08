@@ -1,15 +1,15 @@
 package com.georgehorrell.gmtcalculator;
 
-import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -78,9 +78,6 @@ public class selectBoatClass extends Activity implements TextWatcher {
     int gmtRaw;
 
     List<Boat> boats = new ArrayList<Boat>();
-
-    String[] boatTypes = {"M1x", "M2x", "M4x", "M2-", "M4-", "M2+", "M4+", "M8+", "LM1x", "LM2x", "LM4x", "LM2-", "LM4-", "LM8+", "JM1x", "JM2x", "JM4x", "JM2-", "JM4-", "JM2+", "JM4+", "JM8+", "W1x", "W2x", "W4x", "W2-", "W4-", "W8+", "LW1x", "LW2x", "LW4x", "LW2-", "JW1x", "JW2x", "JW4x", "JW2-", "JW4-", "JW8+"};
-    int[] boatTimes = {391, 361, 331, 373, 341, 397, 353};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,13 +210,24 @@ public class selectBoatClass extends Activity implements TextWatcher {
 
         double percentage= 0;
         double recRaw = getRecordedRaw(view);
-        String outString;
-        percentage = getPercentage(recRaw, gmtRaw);
-
-
-        TextView percentageTextView = (TextView)findViewById(R.id.percTextView);
-        outString = String.format("%.3f%%", percentage);
-        percentageTextView.setText(outString);
+        if(recRaw != 0) {
+            String outString;
+            percentage = getPercentage(recRaw, gmtRaw);
+            TextView percentageTextView = (TextView) findViewById(R.id.percTextView);
+            outString = String.format("%.3f%%", percentage);
+            percentageTextView.setText(outString);
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle("Error")
+                    .setMessage("The recorded time entered was invalid. Please use the format MM:SS.FF")
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
     }
 
     public double getPercentage(double recordedTime, int gmtTime) {
@@ -244,24 +252,28 @@ public class selectBoatClass extends Activity implements TextWatcher {
         int milliInt;
         double recTimeRaw;
 
-        // Pull initial values from EditText field as EditText objects
-        EditText inputTime = (EditText)findViewById(R.id.inputTimeField);
+        try {
 
-        // Convert all values to strings
-        inputTimeStr = inputTime.getText().toString();
+            // Pull initial values from EditText field as EditText objects
+            EditText inputTime = (EditText) findViewById(R.id.inputTimeField);
 
-        // Split inputTimeStr to component strings
-        String[] inputParts = inputTimeStr.split("(:)|(\\.)");
+            // Convert all values to strings
+            inputTimeStr = inputTime.getText().toString();
 
-        // Convert all strings to integers
-        minInt = Integer.parseInt(inputParts[0]);
-        secInt = Integer.parseInt(inputParts[1]);
-        milliInt = Integer.parseInt(inputParts[2]);
+            // Split inputTimeStr to component strings
+            String[] inputParts = inputTimeStr.split("(:)|(\\.)");
 
-        // combination logic
-        recTimeRaw = (double)(minInt*60) + (double)secInt + (((double)(milliInt))/100);
-        return recTimeRaw;
+            // Convert all strings to integers
+            minInt = Integer.parseInt(inputParts[0]);
+            secInt = Integer.parseInt(inputParts[1]);
+            milliInt = Integer.parseInt(inputParts[2]);
 
+            // combination logic
+            recTimeRaw = (double) (minInt * 60) + (double) secInt + (((double) (milliInt)) / 100);
+            return recTimeRaw;
+        } catch(Exception e) {
+            return 0;
+        }
     }
 
     @Override
