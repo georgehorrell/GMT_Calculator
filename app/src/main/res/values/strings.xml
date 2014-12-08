@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GMT Calculator</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="gmtButtonText">Calculate %GMT</string>
+    <string name="timeHint">MM:SS.FF</string>
+
+</resources>

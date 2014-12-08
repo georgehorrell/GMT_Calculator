@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blu1">#2D61A6</color>
+    <color name="blu2">#2393D9</color>
+    <color name="blu3">#30A9D9</color>
+    <color name="blu4">#43BDD9</color>
+    <color name="blu5">#62D9D9</color>
+    <color name="white">#fff</color>
+    <color name="emphasis">#31b6e7</color>
+    <color name="bg_gray">#cecbce</color>
+</resources>

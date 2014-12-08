@@ -1,0 +1,90 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".selectBoatClass"
+    android:id="@+id/mainLayout">
+
+    <TextView
+        android:text="SELECT BOATCLASS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/sectionHeader"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:spinnerMode="dialog" />
+
+    <TextView
+        android:text="BOATCLASS GMT TIME"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/sectionHeader"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_gravity="center"
+        android:text="06:30.13"
+        android:id="@+id/gmtTextView" />
+
+    <TextView
+        android:text="INPUT TIME"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/sectionHeader"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/timeHint"
+        android:layout_gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/inputTimeField"
+        android:inputType="numberDecimal"
+        android:digits="0123456789:."
+        android:gravity="center" />
+
+
+
+</LinearLayout>
+
+    <TextView
+        android:text="OUTPUT PERCENTAGE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/percTextView"
+        style="@style/sectionHeader"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="%"
+        android:id="@+id/percTextView"
+        android:textSize="60dp"
+        android:layout_gravity="center"
+        android:layout_above="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gmtButtonText"
+        android:id="@+id/button"
+        android:onClick="setPercentageView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
