@@ -6,5 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="gmtButtonText">Calculate %GMT</string>
     <string name="timeHint">MM:SS.FF</string>
+    <string name="boatclassTimeHeader">BOATCLASS GMT TIME</string>
+    <string name="selectBoatclassHeader">SELECT BOATCLASS</string>
+    <string name="inputTimeHeader">INPUT TIME</string>
 
 </resources>
